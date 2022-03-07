@@ -14,16 +14,20 @@ const todos = [
 
 function App(props) {
 	return (
-		<>
+		<div className='app'>
 			<TodoCounter />
 			<TodoSearch />
 			<TodoList>
 				{todos.map((todo) => (
-					<TodoItem key={todo.text} text={todo.text} />
+					<TodoItem
+						key={todo.text}
+						text={todo.text}
+						completed={todo.completed}
+					/>
 				))}
 			</TodoList>
 			<TodoCreateButton />
-		</>
+		</div>
 	);
 }
 
