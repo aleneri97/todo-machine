@@ -2,5 +2,9 @@ import React from 'react';
 import './TodoCreateButton.scss';
 
 export function TodoCreateButton() {
-	return <button>+</button>;
+	const onClickButton = (msg) => {
+		alert(msg);
+	};
+
+	return <button onClick={() => onClickButton('clicked')}>+</button>;
 }
