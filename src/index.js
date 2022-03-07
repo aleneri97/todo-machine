@@ -4,8 +4,6 @@ import './index.css';
 import App from './App';
 
 ReactDOM.render(
-    <App author="Manuel" email="ale_neri@yahoo.com" >
-      Hello!
-    </App>,
+    <App />,
     document.getElementById('root')
 );
