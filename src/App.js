@@ -35,6 +35,28 @@ function App(props) {
 		);
 	}
 
+	const completeTodo = (text) => {
+		// Find the index of the todo (in the complete list)
+		const index = todos.findIndex((todo) => todo.text === text);
+		// Create a copy of the todos
+		const newTodos = [...todos];
+		// Update the todo at the index and toggle it
+		newTodos[index].completed = !newTodos[index].completed;
+		// Update the state
+		setTodos(newTodos);
+	};
+
+	const deleteTodo = (text) => {
+		// Find the index of the todo (in the complete list)
+		const index = todos.findIndex((todo) => todo.text === text);
+		// Create a copy of the todos
+		let newTodos = [...todos];
+		// Update the todo at the index and toggle it
+		newTodos.splice(index, 1);
+		// Update the state
+		setTodos(newTodos);
+	};
+
 	return (
 		<div className='app'>
 			<TodoCounter completed={completedTodos} total={totalTodos} />
@@ -48,6 +70,8 @@ function App(props) {
 						key={todo.text}
 						text={todo.text}
 						completed={todo.completed}
+						onComplete={() => completeTodo(todo.text)}
+						onDelete={() => deleteTodo(todo.text)}
 					/>
 				))}
 			</TodoList>
