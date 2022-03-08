@@ -2,15 +2,18 @@ import React from 'react';
 import './App.css';
 import {AppUi} from './AppUi';
 
-const defaultTodos = [
-	{text: 'Cortar cebolla', completed: false},
-	{text: 'Bañar al león', completed: false},
-	{text: 'Hacer la comida', completed: true},
-	{text: 'Lavar los platos', completed: true},
-];
+function App() {
+	const lsTodos = localStorage.getItem('todos_v1');
 
-function App(props) {
-	const [todos, setTodos] = React.useState(defaultTodos);
+	let parsedTodos = [];
+
+	if (!lsTodos) {
+		localStorage.setItem('todos_v1', JSON.stringify([]));
+	} else {
+		parsedTodos = JSON.parse(lsTodos);
+	}
+
+	const [todos, setTodos] = React.useState(parsedTodos);
 	const [searchValue, setSearchValue] = React.useState('');
 
 	const completedTodos = todos.filter((todo) => !!todo.completed).length;
@@ -31,6 +34,11 @@ function App(props) {
 		);
 	}
 
+	const saveTodos = (newTodos) => {
+		setTodos(newTodos);
+		localStorage.setItem('todos_v1', JSON.stringify(newTodos));
+	};
+
 	const toggleTodo = (text) => {
 		// Find the index of the todo (in the complete list)
 		const index = todos.findIndex((todo) => todo.text === text);
@@ -39,7 +47,7 @@ function App(props) {
 		// Update the todo at the index and toggle it
 		newTodos[index].completed = !newTodos[index].completed;
 		// Update the state
-		setTodos(newTodos);
+		saveTodos(newTodos);
 	};
 
 	const deleteTodo = (text) => {
@@ -50,7 +58,7 @@ function App(props) {
 		// Update the todo at the index and toggle it
 		newTodos.splice(index, 1);
 		// Update the state
-		setTodos(newTodos);
+		saveTodos(newTodos);
 	};
 
 	return (
