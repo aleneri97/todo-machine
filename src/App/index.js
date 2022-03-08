@@ -1,10 +1,6 @@
-import {TodoCreateButton} from './TodoCreateButton';
-import {TodoSearch} from './TodoSearch';
-import {TodoCounter} from './TodoCounter';
-import {TodoList} from './TodoList';
-import {TodoItem} from './TodoItem';
 import React from 'react';
 import './App.css';
+import {AppUi} from './AppUi';
 
 const defaultTodos = [
 	{text: 'Cortar cebolla', completed: false},
@@ -35,7 +31,7 @@ function App(props) {
 		);
 	}
 
-	const completeTodo = (text) => {
+	const toggleTodo = (text) => {
 		// Find the index of the todo (in the complete list)
 		const index = todos.findIndex((todo) => todo.text === text);
 		// Create a copy of the todos
@@ -58,25 +54,15 @@ function App(props) {
 	};
 
 	return (
-		<div className='app'>
-			<TodoCounter completed={completedTodos} total={totalTodos} />
-			<TodoSearch
-				searchValue={searchValue}
-				setSearchValue={setSearchValue}
-			/>
-			<TodoList>
-				{filteredTodos.map((todo) => (
-					<TodoItem
-						key={todo.text}
-						text={todo.text}
-						completed={todo.completed}
-						onComplete={() => completeTodo(todo.text)}
-						onDelete={() => deleteTodo(todo.text)}
-					/>
-				))}
-			</TodoList>
-			<TodoCreateButton />
-		</div>
+		<AppUi
+			completed={completedTodos}
+			total={totalTodos}
+			searchValue={searchValue}
+			setSearchValue={setSearchValue}
+			filteredTodos={filteredTodos}
+			toggleTodo={toggleTodo}
+			deleteTodo={deleteTodo}
+		/>
 	);
 }
 
