@@ -4,7 +4,6 @@ import './TodoSearch.scss';
 export function TodoSearch({searchValue, setSearchValue}) {
 	const onSearchValueChange = (e) => {
 		setSearchValue(e.target.value);
-		console.log(e.target.value);
 	};
 
 	return (

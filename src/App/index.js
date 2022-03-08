@@ -3,30 +3,54 @@ import './App.css';
 import {AppUi} from './AppUi';
 
 function useLocalStorage(key, initialValue) {
-	// Get the initial value from localStorage
-	const lsItem = localStorage.getItem(key);
-	// Parse the value from localStorage
-	let parsedItem = initialValue;
-	if (!lsItem) {
-		// If there is no value in localStorage, set the initial value
-		localStorage.setItem(key, JSON.stringify(initialValue));
-	} else {
-		// If there is a value in localStorage, parse it
-		parsedItem = JSON.parse(lsItem);
-	}
 	// Return the parsed value and a function to update it
-	const [item, setItem] = React.useState(parsedItem);
+	const [error, setError] = React.useState(false);
+	const [loading, setLoading] = React.useState(true);
+	const [item, setItem] = React.useState(initialValue);
+
+	React.useEffect(() => {
+		setTimeout(() => {
+			try {
+				// Get the initial value from localStorage
+				const lsItem = localStorage.getItem(key);
+				// Parse the value from localStorage
+				let parsedItem = initialValue;
+				if (!lsItem) {
+					// If there is no value in localStorage, set the initial value
+					localStorage.setItem(key, JSON.stringify(initialValue));
+				} else {
+					// If there is a value in localStorage, parse it
+					parsedItem = JSON.parse(lsItem);
+				}
+				// Update the state
+				setItem(parsedItem);
+				setLoading(false);
+			} catch (error) {
+				setError(error);
+			}
+		}, 1000);
+	}, []);
+
 	// Update the value in localStorage and the state
 	const saveItem = (newTodos) => {
-		setItem(newTodos);
-		localStorage.setItem(key, JSON.stringify(newTodos));
+		try {
+			localStorage.setItem(key, JSON.stringify(newTodos));
+			setItem(newTodos);
+		} catch (error) {
+			setError(error);
+		}
 	};
 
-	return [item, saveItem];
+	return {item, saveItem, loading, error};
 }
 
 function App() {
-	const [todos, saveTodos] = useLocalStorage('todos_v1', []);
+	const {
+		item: todos,
+		saveItem: saveTodos,
+		loading,
+		error,
+	} = useLocalStorage('todos_v1', []);
 	const [searchValue, setSearchValue] = React.useState('');
 
 	const completedTodos = todos.filter((todo) => !!todo.completed).length;
@@ -71,6 +95,8 @@ function App() {
 
 	return (
 		<AppUi
+			loading={loading}
+			error={error}
 			completed={completedTodos}
 			total={totalTodos}
 			searchValue={searchValue}
