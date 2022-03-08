@@ -2,18 +2,31 @@ import React from 'react';
 import './App.css';
 import {AppUi} from './AppUi';
 
-function App() {
-	const lsTodos = localStorage.getItem('todos_v1');
-
-	let parsedTodos = [];
-
-	if (!lsTodos) {
-		localStorage.setItem('todos_v1', JSON.stringify([]));
+function useLocalStorage(key, initialValue) {
+	// Get the initial value from localStorage
+	const lsItem = localStorage.getItem(key);
+	// Parse the value from localStorage
+	let parsedItem = initialValue;
+	if (!lsItem) {
+		// If there is no value in localStorage, set the initial value
+		localStorage.setItem(key, JSON.stringify(initialValue));
 	} else {
-		parsedTodos = JSON.parse(lsTodos);
+		// If there is a value in localStorage, parse it
+		parsedItem = JSON.parse(lsItem);
 	}
+	// Return the parsed value and a function to update it
+	const [item, setItem] = React.useState(parsedItem);
+	// Update the value in localStorage and the state
+	const saveItem = (newTodos) => {
+		setItem(newTodos);
+		localStorage.setItem(key, JSON.stringify(newTodos));
+	};
 
-	const [todos, setTodos] = React.useState(parsedTodos);
+	return [item, saveItem];
+}
+
+function App() {
+	const [todos, saveTodos] = useLocalStorage('todos_v1', []);
 	const [searchValue, setSearchValue] = React.useState('');
 
 	const completedTodos = todos.filter((todo) => !!todo.completed).length;
@@ -33,11 +46,6 @@ function App() {
 			cleanString(todo.text).includes(cleanString(searchValue))
 		);
 	}
-
-	const saveTodos = (newTodos) => {
-		setTodos(newTodos);
-		localStorage.setItem('todos_v1', JSON.stringify(newTodos));
-	};
 
 	const toggleTodo = (text) => {
 		// Find the index of the todo (in the complete list)
