@@ -5,9 +5,10 @@ import {TodoCounter} from '../TodoCounter';
 import {TodoList} from '../TodoList';
 import {TodoItem} from '../TodoItem';
 import {TodoContext} from '../TodoContext';
+import {Modal} from '../Modal';
 
 export function AppUi() {
-	const {error, loading, filteredTodos, toggleTodo, deleteTodo} =
+	const {error, loading, filteredTodos, toggleTodo, deleteTodo, openModal} =
 		React.useContext(TodoContext);
 
 	return (
@@ -28,6 +29,13 @@ export function AppUi() {
 					/>
 				))}
 			</TodoList>
+
+			{openModal && (
+				<Modal>
+					<p>{filteredTodos[0]?.text}</p>
+				</Modal>
+			)}
+
 			<TodoCreateButton />
 		</div>
 	);
