@@ -3,10 +3,10 @@ import './TodoCreateButton.scss';
 import {TodoContext} from '../TodoContext';
 
 export function TodoCreateButton() {
-	const {setOpenModal} = React.useContext(TodoContext);
+	const {openModal, setOpenModal} = React.useContext(TodoContext);
 
 	const onClickButton = () => {
-		setOpenModal(true);
+		setOpenModal(!openModal);
 	};
 
 	return <button onClick={() => onClickButton()}>+</button>;
