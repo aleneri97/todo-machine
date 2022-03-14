@@ -1,4 +1,4 @@
-button {
+.btn-rounded {
     display: flex;
     position: fixed;
     bottom: 24px;
@@ -15,11 +15,11 @@ button {
     cursor: pointer;
     z-index: 1002;
     transform: rotate(0deg);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
 
 .opened {
     transform: rotate(45deg);
     background-color: rgb(216, 34, 34);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }

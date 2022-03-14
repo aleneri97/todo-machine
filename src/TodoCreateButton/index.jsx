@@ -11,7 +11,7 @@ export function TodoCreateButton() {
 
 	return (
 		<button
-			className={openModal && 'opened'}
+			className={`btn-rounded ${openModal && 'opened'}`}
 			onClick={() => onClickButton()}
 		>
 			+
