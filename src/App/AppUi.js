@@ -6,6 +6,7 @@ import {TodoList} from '../TodoList';
 import {TodoItem} from '../TodoItem';
 import {TodoContext} from '../TodoContext';
 import {Modal} from '../Modal';
+import {TodoForm} from '../TodoForm';
 
 export function AppUi() {
 	const {error, loading, filteredTodos, toggleTodo, deleteTodo, openModal} =
@@ -32,7 +33,7 @@ export function AppUi() {
 
 			{openModal && (
 				<Modal>
-					<p>{filteredTodos[0]?.text}</p>
+					<TodoForm />
 				</Modal>
 			)}
 

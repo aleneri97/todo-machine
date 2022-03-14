@@ -1,0 +1,42 @@
+form {
+    width: 88%;
+    margin: 0 auto;
+    max-width: 280px;
+    background: rgb(240, 240, 240);
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: black;
+
+    textarea {
+        margin: 8px 0;
+        width: 88%;
+        padding: 8px;
+        resize: none;
+    }
+
+    .btn {
+        background: #ccc;
+        border: none;
+        padding: 8px;
+        border-radius: 4px;
+        margin-left: 8px;
+        position: relative;
+        width: 88px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .btn-affirmative {
+        background: #2ecc71;
+        color: white;
+    }
+
+    .btn-negative {
+        background: #e74c3c;
+        color: white;
+    }
+}
