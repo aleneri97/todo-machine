@@ -9,9 +9,17 @@ button {
     justify-content: center;
     align-items: center;
     background-color: rgb(39, 152, 204);
-    font-size: 32px;
+    font-size: 40px;
     color: white;
     border: none;
     cursor: pointer;
     z-index: 1002;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.opened {
+    transform: rotate(45deg);
+    background-color: rgb(216, 34, 34);
+    transition: transform 0.3s ease-in-out;
 }

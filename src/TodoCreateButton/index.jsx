@@ -9,5 +9,12 @@ export function TodoCreateButton() {
 		setOpenModal(!openModal);
 	};
 
-	return <button onClick={() => onClickButton()}>+</button>;
+	return (
+		<button
+			className={openModal && 'opened'}
+			onClick={() => onClickButton()}
+		>
+			+
+		</button>
+	);
 }
