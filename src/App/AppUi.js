@@ -7,15 +7,31 @@ import {TodoItem} from '../TodoItem';
 import {TodoContext} from '../TodoContext';
 import {Modal} from '../Modal';
 import {TodoForm} from '../TodoForm';
+import {TodoHeader} from '../TodoHeader';
 
 export function AppUi() {
-	const {error, loading, filteredTodos, toggleTodo, deleteTodo, openModal} =
-		React.useContext(TodoContext);
+	const {
+		error,
+		loading,
+		filteredTodos,
+		toggleTodo,
+		deleteTodo,
+		openModal,
+		completed,
+		total,
+		searchValue,
+		setSearchValue,
+	} = React.useContext(TodoContext);
 
 	return (
 		<div className='app'>
-			<TodoCounter />
-			<TodoSearch />
+			<TodoHeader>
+				<TodoCounter completed={completed} total={total} />
+				<TodoSearch
+					searchValue={searchValue}
+					setSearchValue={setSearchValue}
+				/>
+			</TodoHeader>
 			<TodoList>
 				{error && <p>Error: {error}</p>}
 				{loading && <p>Loading...</p>}
