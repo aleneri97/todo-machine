@@ -9,6 +9,9 @@ import {Modal} from '../Modal';
 import {TodoForm} from '../TodoForm';
 import {TodoHeader} from '../TodoHeader';
 import {useTodos} from './useTodos';
+import {TodoError} from '../TodoError';
+import {TodoLoading} from '../TodoLoading';
+import {TodoEmpty} from '../TodoEmpty';
 
 function App() {
 	const {
@@ -35,11 +38,14 @@ function App() {
 					setSearchValue={setSearchValue}
 				/>
 			</TodoHeader>
-			<TodoList>
-				{error && <p>Error: {error}</p>}
-				{loading && <p>Loading...</p>}
-				{!loading && !filteredTodos.length && <p>No todos found</p>}
-				{filteredTodos.map((todo) => (
+			<TodoList
+				error={error}
+				loading={loading}
+				todos={filteredTodos}
+				onError={() => <TodoError />}
+				onLoading={() => <TodoLoading />}
+				onEmpty={() => <TodoEmpty />}
+				render={(todo) => (
 					<TodoItem
 						key={todo.text}
 						text={todo.text}
@@ -47,8 +53,8 @@ function App() {
 						onComplete={() => toggleTodo(todo.text)}
 						onDelete={() => deleteTodo(todo.text)}
 					/>
-				))}
-			</TodoList>
+				)}
+			/>
 
 			{openModal && (
 				<Modal>
