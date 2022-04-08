@@ -8,3 +8,7 @@ input {
     top: 16px;
     z-index: 1000;
 }
+
+.TodoSearch:disabled {
+    opacity: 0.25;
+}
