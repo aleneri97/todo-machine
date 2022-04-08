@@ -32,16 +32,11 @@ function App() {
 
 	return (
 		<div className='app'>
-			<TodoHeader>
-				<TodoCounter
-					completed={completed}
-					total={total}
-					loading={loading}
-				/>
+			<TodoHeader loading={loading}>
+				<TodoCounter completed={completed} total={total} />
 				<TodoSearch
 					searchValue={searchValue}
 					setSearchValue={setSearchValue}
-					loading={loading}
 				/>
 			</TodoHeader>
 			<TodoList
