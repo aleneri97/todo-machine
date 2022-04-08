@@ -4,12 +4,21 @@ import './TodoList.scss';
 export function TodoList(props) {
 	return (
 		<section className='TodoList-container'>
+			{/* Error */}
 			{props.error && props.onError()}
+			{/* Loading */}
 			{props.loading && props.onLoading()}
-			{!props.loading && !props.todos.length && props.onEmpty()}
-			{props.todos.map(props.render)}
-
-			<ul>{props.children}</ul>
+			{/* Empty (no data) */}
+			{!props.loading &&
+				!props.searchValue &&
+				!props.total &&
+				props.onEmpty()}
+			{/* Empty result */}
+			{!props.todos.length &&
+				!!props.searchValue &&
+				props.onEmptyResult(props.searchValue)}
+			{/* Results */}
+			{props.todos.map(props.render || props.children)}
 		</section>
 	);
 }

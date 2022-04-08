@@ -12,6 +12,7 @@ import {useTodos} from './useTodos';
 import {TodoError} from '../TodoError';
 import {TodoLoading} from '../TodoLoading';
 import {TodoEmpty} from '../TodoEmpty';
+import {TodoEmptyResult} from '../TodoEmptyResults';
 
 function App() {
 	const {
@@ -42,10 +43,23 @@ function App() {
 				error={error}
 				loading={loading}
 				todos={filteredTodos}
+				total={total}
+				searchValue={searchValue}
 				onError={() => <TodoError />}
 				onLoading={() => <TodoLoading />}
 				onEmpty={() => <TodoEmpty />}
-				render={(todo) => (
+				onEmptyResult={(search) => <TodoEmptyResult search={search} />}
+				// render={(todo) => (
+				// 	<TodoItem
+				// 		key={todo.text}
+				// 		text={todo.text}
+				// 		completed={todo.completed}
+				// 		onComplete={() => toggleTodo(todo.text)}
+				// 		onDelete={() => deleteTodo(todo.text)}
+				// 	/>
+				// )}
+			>
+				{(todo) => (
 					<TodoItem
 						key={todo.text}
 						text={todo.text}
@@ -54,7 +68,7 @@ function App() {
 						onDelete={() => deleteTodo(todo.text)}
 					/>
 				)}
-			/>
+			</TodoList>
 
 			{openModal && (
 				<Modal>
