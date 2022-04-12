@@ -13,6 +13,7 @@ import {TodoError} from '../TodoError';
 import {TodoLoading} from '../TodoLoading';
 import {TodoEmpty} from '../TodoEmpty';
 import {TodoEmptyResult} from '../TodoEmptyResults';
+import {ChangeAlertWithStorageAlert} from '../ChangeAlert';
 
 function App() {
 	const {
@@ -49,15 +50,6 @@ function App() {
 				onLoading={() => <TodoLoading />}
 				onEmpty={() => <TodoEmpty />}
 				onEmptyResult={(search) => <TodoEmptyResult search={search} />}
-				// render={(todo) => (
-				// 	<TodoItem
-				// 		key={todo.text}
-				// 		text={todo.text}
-				// 		completed={todo.completed}
-				// 		onComplete={() => toggleTodo(todo.text)}
-				// 		onDelete={() => deleteTodo(todo.text)}
-				// 	/>
-				// )}
 			>
 				{(todo) => (
 					<TodoItem
@@ -69,6 +61,8 @@ function App() {
 					/>
 				)}
 			</TodoList>
+
+			<ChangeAlertWithStorageAlert />
 
 			{openModal && (
 				<Modal>
