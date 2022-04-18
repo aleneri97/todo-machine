@@ -3,7 +3,9 @@ import {withStorageListener} from './withStorageListener';
 
 function ChangeAlert({show, toggleShow}) {
 	if (show) {
-		return <p>¿Hubo cambios?</p>;
+		return <p>¡Hubo cambios!</p>;
+	} else {
+		return <></>;
 	}
 }
 
