@@ -6,7 +6,6 @@ export function withStorageListener(WrappedComponent) {
 
 		window.addEventListener('storage', (change) => {
 			if (change.key == 'todos_v1') {
-				console.log('Hubo cambios');
 				setStorageChanged(true);
 			}
 		});
