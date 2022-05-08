@@ -29,7 +29,7 @@ export function useLocalStorage(key, initialValue) {
 				setError(error);
 			}
 		}, 1000);
-	}, [synchronizedItem]);
+	}, [initialValue, key, synchronizedItem]);
 
 	const syncItems = () => {
 		setLoading(true);

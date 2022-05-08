@@ -53,7 +53,6 @@ function App() {
 				onEmptyResult={(search) => <TodoEmptyResult search={search} />}
 			>
 				{(todo) => (
-					!loading &&
 					<TodoItem
 						key={todo.text}
 						text={todo.text}
