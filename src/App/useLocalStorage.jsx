@@ -23,8 +23,8 @@ export function useLocalStorage(key, initialValue) {
 				}
 				// Update the state
 				setItem(parsedItem);
-				setLoading(false);
 				setSynchronizedItem(true);
+				setLoading(false);
 			} catch (error) {
 				setError(error);
 			}
