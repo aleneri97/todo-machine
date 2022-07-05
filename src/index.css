@@ -18,3 +18,20 @@ body {
   position: relative;
   min-height: 100vh;
 }
+
+.text-disabled {
+  color: #524c5b;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.btn-raised {
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0px 4px 6px 0px #bbb;
+  cursor: pointer;
+}

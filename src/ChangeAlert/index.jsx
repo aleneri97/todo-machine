@@ -1,12 +1,13 @@
 import React from 'react';
-import {withStorageListener} from './withStorageListener';
+import {useStorageListener} from './useStorageListener';
 
-function ChangeAlert({show, toggleShow}) {
+function ChangeAlert({sync}) {
+	const { show, toggleShow } = useStorageListener(sync);
 	if (show) {
 		return (
-			<div>
-				<p>¡Hubo cambios!</p>
-				<button onClick={() => toggleShow(false)}>Sincronizar</button>
+			<div className="text-center">
+				<p className="text-disabled">¡Hubo cambios!</p>
+				<button className="btn-raised" onClick={() => toggleShow(false)}>Sincronizar</button>
 			</div>
 		);
 	} else {
@@ -14,6 +15,4 @@ function ChangeAlert({show, toggleShow}) {
 	}
 }
 
-const ChangeAlertWithStorageAlert = withStorageListener(ChangeAlert);
-
-export {ChangeAlertWithStorageAlert};
+export { ChangeAlert };

@@ -18,7 +18,7 @@ export function TodoList(props) {
 				!!props.searchValue &&
 				props.onEmptyResult(props.searchValue)}
 			{/* Results */}
-			{props.todos.map(props.render || props.children)}
+			{!props.loading && !props.error && props.todos.map(props.render || props.children)}
 		</section>
 	);
 }
