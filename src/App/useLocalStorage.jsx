@@ -96,6 +96,4 @@ const reducerObject = (state, payload) => ({
 	}
 });
 
-const reducer = (state, action) => {
-	reducerObject(state, action.payload)[action.type] || state;
-}
+const reducer = (state, action) => reducerObject(state, action.payload)[action.type] || state;
