@@ -13,7 +13,7 @@ import {TodoError} from '../TodoError';
 import {TodoLoading} from '../TodoLoading';
 import {TodoEmpty} from '../TodoEmpty';
 import {TodoEmptyResult} from '../TodoEmptyResults';
-import {ChangeAlertWithStorageAlert} from '../ChangeAlert';
+import {ChangeAlert} from '../ChangeAlert';
 
 function App() {
 	const {
@@ -41,6 +41,9 @@ function App() {
 					setSearchValue={setSearchValue}
 				/>
 			</TodoHeader>
+			
+			<ChangeAlert sync={syncTodos} />
+
 			<TodoList
 				error={error}
 				loading={loading}
@@ -62,9 +65,6 @@ function App() {
 					/>
 				)}
 			</TodoList>
-
-			<ChangeAlertWithStorageAlert sync={syncTodos} />
-
 			{openModal && (
 				<Modal>
 					<TodoForm addTodo={addTodo} setOpenModal={setOpenModal} />
